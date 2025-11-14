@@ -23,28 +23,27 @@
     padding: 0;
     width: 100%;
     height: 100%;
+    background: #082b4e; /* your blue */
   }
 
-  /* full-screen area that will hold the animation */
   .stage {
-    position: fixed;
-    inset: 0;                 /* top:0; right:0; bottom:0; left:0; */
+    width: 100vw;
+    height: 100dvh;             /* better on mobile than 100vh */
     display: flex;
-    justify-content: center;  /* horizontal center */
-    align-items: center;      /* vertical center */
-    overflow: hidden;         /* avoid scrollbars and cutting edges */
-    background: #003055;         /* optional, pick your color */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;           /* no scrollbars */
   }
 
-  /* original animation size */
+  /* ORIGINAL GWD SIZE */
   .stage-inner {
     width: 1000px;
     height: 1000px;
     position: relative;
-    transform-origin: center center; /* IMPORTANT: center, not top-left */
+    transform-origin: center center;
   }
 
-  /* make sure GWD doesn’t fight the sizing */
+  /* make the GWD root fill that 1000×1000 box */
   #gwd-ad {
     width: 100%;
     height: 100%;
@@ -1109,7 +1108,8 @@ body {
 
 <script>
   (function () {
-    var BASE_SIZE = 1000; // original width/height
+    var BASE_W = 1000;
+    var BASE_H = 1000;
 
     function resizeAnim() {
       var inner = document.querySelector('.stage-inner');
@@ -1118,10 +1118,9 @@ body {
       var ww = window.innerWidth;
       var wh = window.innerHeight;
 
-      // scale so it fits within the viewport
-      var scale = Math.min(ww, wh) / BASE_SIZE;
+      // scale so that the WHOLE 1000×1000 fits
+      var scale = Math.min(ww / BASE_W, wh / BASE_H);
 
-      // center & scale from the middle
       inner.style.transform = 'scale(' + scale + ')';
     }
 
