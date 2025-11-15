@@ -1057,17 +1057,20 @@ body {
           wrapperHeight = wrapperWidth * (DESIGN_HEIGHT / DESIGN_WIDTH);
         }
         var scale = Math.min(wrapperWidth / DESIGN_WIDTH, wrapperHeight / DESIGN_HEIGHT);
+        var verticalOffset = 0;
         if (wrapperWidth <= 480) {
           scale *= 1.25;
+          verticalOffset = 40;
         } else if (wrapperWidth <= 768) {
           scale *= 1.12;
+          verticalOffset = 25;
         }
         scale = Math.min(scale, 1);
         ad.style.transform = 'scale(' + scale + ')';
         var scaledWidth = DESIGN_WIDTH * scale;
         var scaledHeight = DESIGN_HEIGHT * scale;
         ad.style.left = ((wrapperWidth - scaledWidth) / 2) + 'px';
-        ad.style.top = ((wrapperHeight - scaledHeight) / 2) + 'px';
+        ad.style.top = ((wrapperHeight - scaledHeight) / 2 + verticalOffset) + 'px';
       }
 
       window.addEventListener('resize', scaleAd);
